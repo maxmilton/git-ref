@@ -1,6 +1,6 @@
 {
   "name": "git-ref",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Get the current git reference via git describe",
   "license": "MIT",
   "repository": "https://github.com/MaxMilton/git-ref",
