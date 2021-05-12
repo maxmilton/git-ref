@@ -3,12 +3,14 @@
   "version": "0.0.2",
   "description": "Get the current git reference via git describe",
   "license": "MIT",
-  "repository": "https://github.com/MaxMilton/git-ref",
+  "repository": "https://github.com/maxmilton/git-ref",
   "author": "Max Milton <max@happycode.ltd>",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "build": "NODE_ENV=production tsc",

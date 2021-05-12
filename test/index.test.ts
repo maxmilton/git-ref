@@ -28,5 +28,6 @@ test('returns a git reference', () => {
 // - with a dirty tree (uncommitted changes)
 // - in a broken repo
 // - not in a git repo
+// - in a git repo with commits but no HEAD ref
 
 test.run();
