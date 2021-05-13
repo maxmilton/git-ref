@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "Get the current git reference via git describe",
   "license": "MIT",
-  "repository": "https://github.com/maxmilton/git-ref",
+  "repository": "maxmilton/git-ref",
   "author": "Max Milton <max@happycode.ltd>",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,8 +13,8 @@
     "src"
   ],
   "scripts": {
-    "build": "NODE_ENV=production tsc",
-    "dev": "NODE_ENV=development tsc --watch --preserveWatchOutput",
+    "build": "tsc",
+    "dev": "tsc --watch --preserveWatchOutput",
     "lint": "yarn run lint:js && yarn run lint:ts",
     "lint:js": "eslint --ignore-path .gitignore --ext .ts,.js,.mjs,.cjs .",
     "lint:ts": "tsc --noEmit",
