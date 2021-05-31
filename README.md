@@ -11,6 +11,12 @@ Get the current git reference via [git describe](https://git-scm.com/docs/git-de
 ## Installation
 
 ```sh
+npm install git-ref
+```
+
+or
+
+```sh
 yarn add git-ref
 ```
 
