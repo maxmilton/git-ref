@@ -17,7 +17,7 @@
     "dev": "tsc --watch --preserveWatchOutput",
     "lint": "pnpm run lint:js && pnpm run lint:ts",
     "lint:js": "eslint --ignore-path .gitignore --ext .ts,.js,.mjs,.cjs .",
-    "lint:ts": "tsc --noEmit",
+    "lint:ts": "tsc --project test --noEmit",
     "prebuild": "rm -rf dist; mkdir dist",
     "test": "c8 --all --include=src --reporter=text --reporter=lcovonly uvu -r esbuild-register test '\\.test\\.ts$'"
   },
