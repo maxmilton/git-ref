@@ -1,24 +1,25 @@
-import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import defaultGitRef, { gitRef } from '../src/index';
+import * as allExports from '../src/index';
+import { gitHash, gitRef } from '../src/index';
+import { describe } from './utils';
 
-test('has a default export', () => {
-  assert.type(defaultGitRef, 'function');
-});
+describe('exports', (test) => {
+  (
+    [
+      ['default', 'default'],
+      ['gitRef', 'gitRef named'],
+      ['gitHash', 'gitHash named'],
+    ] as const
+  ).forEach(([name, description]) => {
+    test(`has a ${description} export`, () => {
+      assert.ok(name in allExports);
+      assert.type(allExports[name], 'function');
+    });
+  });
 
-test('has a named export', () => {
-  assert.type(gitRef, 'function');
-});
-
-test('returns a non-empty string', () => {
-  const result = gitRef();
-  assert.is.not(result, '');
-  assert.type(result, 'string');
-});
-
-test('returns a git reference', () => {
-  const result = gitRef();
-  assert.is(/^v\d+\.\d+\.\d+/.test(result), true, 'matches expected format');
+  test('default export is gitRef', () => {
+    assert.is(allExports.default, gitRef);
+  });
 });
 
 // TODO: Run in various other sample git repos, e.g.:
@@ -30,4 +31,35 @@ test('returns a git reference', () => {
 // - not in a git repo
 // - in a git repo with commits but no HEAD ref
 
-test.run();
+describe('gitRef', (test) => {
+  test('returns a non-empty string', () => {
+    const result = gitRef();
+    assert.is.not(result, '');
+    assert.type(result, 'string');
+  });
+
+  test('returns a tag git reference', () => {
+    const result = gitRef();
+    assert.is(/^v\d+\.\d+\.\d+/.test(result), true, 'matches expected format');
+  });
+});
+
+describe('gitHash', (test) => {
+  test('returns a short git hash by default', () => {
+    const result = gitHash();
+    assert.type(result, 'string');
+    assert.is(result.length, 7);
+  });
+
+  test('returns a long git hash with arg true', () => {
+    const result = gitHash(true);
+    assert.type(result, 'string');
+    assert.is(result.length, 40);
+  });
+
+  test('returns a short git hash with arg false', () => {
+    const result = gitHash(false);
+    assert.type(result, 'string');
+    assert.is(result.length, 7);
+  });
+});
