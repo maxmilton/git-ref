@@ -6,7 +6,8 @@
 
 # git-ref
 
-Get the current git reference via [git describe](https://git-scm.com/docs/git-describe).
+Get git strings like a git describe reference or git commit hash.
+
 
 ## Installation
 
@@ -22,12 +23,32 @@ yarn add git-ref
 
 ## Usage
 
+> Note: If run in a script which is not a git tree, or with no commits, an empty string is returned.
+
+### Git reference
+
+Get the current `HEAD` git reference via [git describe](https://git-scm.com/docs/git-describe).
+
 ```js
 import { gitRef } from 'git-ref';
 
 const ref = gitRef();
 
-console.log(ref);
+console.log(ref); // v0.0.3-16-g93d0f1d-dev
+```
+
+### Git hash
+
+Get the current `HEAD` commit hash.
+
+```js
+import { gitHash } from 'git-ref';
+
+const hash = gitHash();
+const hashLong = gitHash(true);
+
+console.log(hash); // 93d0f1d
+console.log(hashLong); // 93d0f1dc4de720863e4b5f74970cf8f2012f3d88
 ```
 
 ## Licence
