@@ -60,6 +60,8 @@ describe('gitRef', (test) => {
     const dir = getTempDir('with-commit');
     execCmds(dir, [
       'git init --quiet',
+      'git config user.email "test@test.com"',
+      'git config user.name "Test Test"',
       'touch file.txt',
       'git add file.txt',
       'git commit --quiet --no-gpg-sign -m "commit1"',
@@ -73,6 +75,8 @@ describe('gitRef', (test) => {
     const dir = getTempDir('with-tag');
     execCmds(dir, [
       'git init --quiet',
+      'git config user.email "test@test.com"',
+      'git config user.name "Test Test"',
       'touch file.txt',
       'git add file.txt',
       'git commit --quiet --no-gpg-sign -m "commit1"',
@@ -86,6 +90,8 @@ describe('gitRef', (test) => {
     const dir = getTempDir('dirty-tree');
     execCmds(dir, [
       'git init --quiet',
+      'git config user.email "test@test.com"',
+      'git config user.name "Test Test"',
       'touch file.txt',
       'git add file.txt',
       'git commit --quiet --no-gpg-sign -m "commit1"',
@@ -101,6 +107,8 @@ describe('gitRef', (test) => {
     const dir = getTempDir('broken-tree');
     execCmds(dir, [
       'git init --quiet',
+      'git config user.email "test@test.com"',
+      'git config user.name "Test Test"',
       'touch file.txt',
       'git add file.txt',
       'git commit --quiet --no-gpg-sign -m "commit1"',
