@@ -1,6 +1,6 @@
 import * as assert from 'uvu/assert';
 import * as allExports from '../src/index';
-import { gitHash, gitRef } from '../src/index';
+import { gitHash, gitRef, isDirty } from '../src/index';
 import {
   createTempDir,
   deleteTempDir,
@@ -13,8 +13,9 @@ describe('exports', (test) => {
   (
     [
       ['default', 'default'],
-      ['gitRef', 'gitRef named'],
-      ['gitHash', 'gitHash named'],
+      ['gitRef', '"gitRef" named'],
+      ['gitHash', '"gitHash" named'],
+      ['isDirty', '"isDirty" named'],
     ] as const
   ).forEach(([name, description]) => {
     test(`has a ${description} export`, () => {
@@ -86,7 +87,7 @@ describe('gitRef', (test) => {
     assert.is(result, 'v123');
   });
 
-  test('returns the latest ref as the git tree changes', () => {
+  test('returns latest ref as the git tree changes', () => {
     const dir = getTempDir('multiple-changes');
     execCmds(dir, [
       'git init --quiet',
@@ -206,7 +207,7 @@ describe('gitHash', (test) => {
     assert.is(result, '');
   });
 
-  test('returns the latest hash as the git tree changes', () => {
+  test('returns latest hash as the git tree changes', () => {
     const dir = getTempDir('multiple-changes');
     execCmds(dir, [
       'git init --quiet',
@@ -236,5 +237,54 @@ describe('gitHash', (test) => {
     const result3 = gitHash(undefined, dir);
     assert.is(result3.length, 7);
     assert.is.not(result2, result3);
+  });
+});
+
+describe('isDirty', (test) => {
+  test.before(createTempDir);
+  test.after(deleteTempDir);
+
+  test('returns false in non-git dir', () => {
+    const dir = getTempDir('not-git');
+    const result = isDirty(dir);
+    assert.is(result, false);
+  });
+
+  test('returns false in repo without commits', () => {
+    const dir = getTempDir('no-commit');
+    execCmds(dir, ['git init --quiet']);
+    const result = isDirty(dir);
+    assert.is(result, false);
+  });
+
+  test('returns true in repo with uncommitted new file', () => {
+    const dir = getTempDir('uncommitted-file');
+    execCmds(dir, ['git init --quiet', 'touch file.txt']);
+    const result = isDirty(dir);
+    assert.is(result, true);
+  });
+
+  test('returns correct state as the git tree changes', () => {
+    const dir = getTempDir('multiple-changes');
+    execCmds(dir, [
+      'git init --quiet',
+      'git config user.email "test@test.com"',
+      'git config user.name "Test Test"',
+      'touch file1.txt',
+    ]);
+    const result1 = isDirty(dir);
+    assert.is(result1, true);
+    execCmds(dir, [
+      'git add file1.txt',
+      'git commit --quiet --no-gpg-sign -m "commit1"',
+    ]);
+    const result2 = isDirty(dir);
+    assert.is(result2, false);
+    execCmds(dir, ['touch file2.txt', 'git add file2.txt']);
+    const result3 = isDirty(dir);
+    assert.is(result3, true);
+    execCmds(dir, ['git commit --quiet --no-gpg-sign -m "commit2"']);
+    const result4 = isDirty(dir);
+    assert.is(result4, false);
   });
 });
