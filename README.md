@@ -66,6 +66,10 @@ const state = isDirty();
 console.log(state); // false
 ```
 
+## Changelog
+
+See [releases on GitHub](https://github.com/maxmilton/git-ref/releases).
+
 ## Licence
 
 `git-ref` is an MIT licensed open source project. See [LICENCE](https://github.com/maxmilton/git-ref/blob/master/LICENCE).
