@@ -8,6 +8,9 @@
 
 Get git strings like a git describe reference or git commit hash.
 
+**Requirements:**
+
+- [git](https://git-scm.com/) must be installed on your system and resolvable in your shell `PATH`.
 
 ## Installation
 
