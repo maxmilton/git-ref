@@ -1,21 +1,19 @@
 import { execSync } from 'child_process';
 
 /**
- * Get the HEAD git reference via `git describe`.
+ * Get the HEAD git reference via [git describe](https://git-scm.com/docs/git-describe).
  *
- * @see <https://git-scm.com/docs/git-describe>
- *
- * @param args - Additional arguments to pass to `git describe`. The default
- * is `'--dirty="-dev" --broken'`.
  * @param cwd - Modify the working directory git is executed in (default is the
  * directory of the current node process).
  * @returns A human readable git reference.
  */
-export function gitRef(args = '--dirty="-dev" --broken', cwd?: string): string {
+export function gitRef(cwd?: string): string {
   let reference = '';
 
   try {
-    const result = execSync(`git describe --always ${args}`, { cwd });
+    const result = execSync('git describe --always --dirty="-dev" --broken', {
+      cwd,
+    });
     reference = result.toString().trim();
   } catch (error) {
     // eslint-disable-next-line no-console
