@@ -58,5 +58,3 @@ export function execCmds(dir: string, cmds: string[]): void {
     });
   });
 }
-
-// export function runInDir(dir:string, cb)
