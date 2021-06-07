@@ -49,3 +49,24 @@ export function gitHash(long?: boolean, cwd?: string): string {
 
   return hash;
 }
+
+/**
+ * Detect git tree dirty state (uncommitted changes).
+ *
+ * @param cwd - Modify the working directory git is executed in (default is the
+ * directory of the current node process).
+ * @returns The dirty state e.g., `true` when there are uncommitted changes.
+ */
+export function isDirty(cwd?: string): boolean {
+  let dirty = false;
+
+  try {
+    const result = execSync('git status --porcelain', { cwd });
+    dirty = !!result.toString().trim();
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+
+  return dirty;
+}
