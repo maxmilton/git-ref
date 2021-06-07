@@ -54,9 +54,9 @@ console.log(hash); // 93d0f1d
 console.log(hashLong); // 93d0f1dc4de720863e4b5f74970cf8f2012f3d88
 ```
 
-### Detect dirty tree state (uncommitted changes)
+### Detect dirty tree state
 
-Find out if the git working tree is dirty (contains uncommitted changes).
+Find out if the git working tree is dirty (e.g., contains uncommitted changes).
 
 ```js
 import { isDirty } from 'git-ref';
