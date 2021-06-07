@@ -86,6 +86,52 @@ describe('gitRef', (test) => {
     assert.is(result, 'v123');
   });
 
+  test('returns the latest ref as the git tree changes', () => {
+    const dir = getTempDir('multiple-changes');
+    execCmds(dir, [
+      'git init --quiet',
+      'git config user.email "test@test.com"',
+      'git config user.name "Test Test"',
+      'touch file1.txt',
+      'git add file1.txt',
+      'git commit --quiet --no-gpg-sign -m "commit1"',
+    ]);
+    const result1 = gitRef(undefined, dir);
+    assert.type(result1, 'string');
+    assert.is(result1.length, 7);
+    execCmds(dir, [
+      'touch file2.txt',
+      'git add file2.txt',
+      'git commit --quiet --no-gpg-sign -m "commit2"',
+    ]);
+    const result2 = gitRef(undefined, dir);
+    assert.type(result2, 'string');
+    assert.is(result2.length, 7);
+    assert.is.not(result1, result2);
+    execCmds(dir, ['git tag --no-sign -m "v1" v1']);
+    const result3 = gitRef(undefined, dir);
+    assert.is(result3, 'v1');
+    assert.is.not(result2, result3);
+    execCmds(dir, [
+      'touch file3.txt',
+      'git add file3.txt',
+      'git commit --quiet --no-gpg-sign -m "commit3"',
+      'git tag --no-sign -m "v2" v2',
+    ]);
+    const result4 = gitRef(undefined, dir);
+    assert.is(result4, 'v2');
+    assert.is.not(result3, result4);
+    execCmds(dir, [
+      'touch file4.txt',
+      'git add file4.txt',
+      'git commit --quiet --no-gpg-sign -m "commit4"',
+    ]);
+    const result5 = gitRef(undefined, dir);
+    assert.is(result5.length, 13);
+    assert.ok(result5.startsWith('v2-1-'));
+    assert.is.not(result4, result5);
+  });
+
   test('appends "-dev" in repo with dirty tree (uncommitted changes)', () => {
     const dir = getTempDir('dirty-tree');
     execCmds(dir, [
@@ -158,5 +204,37 @@ describe('gitHash', (test) => {
     execCmds(dir, ['git init --quiet']);
     const result = gitHash(undefined, dir);
     assert.is(result, '');
+  });
+
+  test('returns the latest hash as the git tree changes', () => {
+    const dir = getTempDir('multiple-changes');
+    execCmds(dir, [
+      'git init --quiet',
+      'git config user.email "test@test.com"',
+      'git config user.name "Test Test"',
+      'touch file1.txt',
+      'git add file1.txt',
+      'git commit --quiet --no-gpg-sign -m "commit1"',
+    ]);
+    const result1 = gitHash(undefined, dir);
+    assert.type(result1, 'string');
+    assert.is(result1.length, 7);
+    execCmds(dir, [
+      'touch file2.txt',
+      'git add file2.txt',
+      'git commit --quiet --no-gpg-sign -m "commit2"',
+    ]);
+    const result2 = gitHash(undefined, dir);
+    assert.type(result2, 'string');
+    assert.is(result2.length, 7);
+    assert.is.not(result1, result2);
+    execCmds(dir, [
+      'touch file3.txt',
+      'git add file3.txt',
+      'git commit --quiet --no-gpg-sign -m "commit3"',
+    ]);
+    const result3 = gitHash(undefined, dir);
+    assert.is(result3.length, 7);
+    assert.is.not(result2, result3);
   });
 });
