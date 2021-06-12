@@ -21,9 +21,8 @@
     "prebuild": "rm -rf dist; mkdir dist",
     "test": "c8 --all --include=src --reporter=text --reporter=lcovonly uvu -r esbuild-register test '\\.test\\.ts$'"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@types/node": "15.12.1",
+    "@types/node": "15.12.2",
     "@typescript-eslint/eslint-plugin": "4.26.1",
     "@typescript-eslint/parser": "4.26.1",
     "c8": "7.7.2",
