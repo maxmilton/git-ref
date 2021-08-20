@@ -16,6 +16,12 @@ export function describe(
 let tmpDir: string | undefined;
 
 export async function createTempDir(): Promise<void> {
+  if (tmpDir) {
+    throw new Error(
+      'Temp directory exists, did you forget to call deleteTempDir()',
+    );
+  }
+
   tmpDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'git-ref-test-'));
 }
 
