@@ -1,6 +1,8 @@
 import * as assert from 'uvu/assert';
 import * as allExports from '../src/index';
-import { gitHash, gitRef, isDirty } from '../src/index';
+import {
+  fromClosestTag, gitHash, gitRef, isDirty,
+} from '../src/index';
 import {
   createTempDir,
   deleteTempDir,
@@ -16,6 +18,7 @@ describe('exports', (test) => {
       ['gitRef', '"gitRef" named'],
       ['gitHash', '"gitHash" named'],
       ['isDirty', '"isDirty" named'],
+      ['fromClosestTag', '"fromClosestTag" named'],
     ] as const
   ).forEach(([name, description]) => {
     test(`has a ${description} export`, () => {
@@ -286,5 +289,118 @@ describe('isDirty', (test) => {
     execCmds(dir, ['git commit --quiet --no-gpg-sign -m "commit2"']);
     const result4 = isDirty(dir);
     assert.is(result4, false);
+  });
+});
+
+describe('fromClosestTag', (test) => {
+  test.before(createTempDir);
+  test.after(deleteTempDir);
+
+  test('returns -1 in non-git dir', () => {
+    const dir = getTempDir('not-git');
+    const result = fromClosestTag(dir);
+    assert.is(result, -1);
+  });
+
+  test('returns -1 in repo without commits', () => {
+    const dir = getTempDir('no-commit');
+    execCmds(dir, ['git init --quiet']);
+    const result = fromClosestTag(dir);
+    assert.is(result, -1);
+  });
+
+  test('returns -1 in repo with uncommitted new file', () => {
+    const dir = getTempDir('uncommitted-file');
+    execCmds(dir, ['git init --quiet', 'touch file.txt']);
+    const result = fromClosestTag(dir);
+    assert.is(result, -1);
+  });
+
+  test('returns 0 in repo with no tags', () => {
+    const dir = getTempDir('with-commit');
+    execCmds(dir, [
+      'git init --quiet',
+      'git config user.email "test@test.com"',
+      'git config user.name "Test Test"',
+      'touch file1.txt',
+      'git add file1.txt',
+      'git commit --quiet --no-gpg-sign -m "commit1"',
+    ]);
+    const result1 = fromClosestTag(dir);
+    assert.type(result1, 'number');
+    assert.is(result1, 0);
+    execCmds(dir, [
+      'touch file2.txt',
+      'git add file2.txt',
+      'git commit --quiet --no-gpg-sign -m "commit2"',
+    ]);
+    const result2 = fromClosestTag(dir);
+    assert.type(result2, 'number');
+    assert.is(result2, 0);
+    execCmds(dir, [
+      'touch file3.txt',
+      'git add file3.txt',
+      'git commit --quiet --no-gpg-sign -m "commit3"',
+    ]);
+    const result3 = fromClosestTag(dir);
+    assert.type(result3, 'number');
+    assert.is(result3, 0);
+  });
+
+  test('returns count in repo with commits after tag', () => {
+    const dir = getTempDir('tag-commits');
+    execCmds(dir, [
+      'git init --quiet',
+      'git config user.email "test@test.com"',
+      'git config user.name "Test Test"',
+      'touch file1.txt',
+      'git add file1.txt',
+      'git commit --quiet --no-gpg-sign -m "commit1"',
+    ]);
+    const result1 = fromClosestTag(dir);
+    assert.type(result1, 'number');
+    assert.is(result1, 0);
+    execCmds(dir, [
+      'touch file2.txt',
+      'git add file2.txt',
+      'git commit --quiet --no-gpg-sign -m "commit2"',
+      'git tag --no-sign -m "v1" v1',
+    ]);
+    const result2 = fromClosestTag(dir);
+    assert.type(result2, 'number');
+    assert.is(result2, 0);
+    execCmds(dir, [
+      'touch file3.txt',
+      'git add file3.txt',
+      'git commit --quiet --no-gpg-sign -m "commit3"',
+    ]);
+    const result3 = fromClosestTag(dir);
+    assert.type(result3, 'number');
+    assert.is(result3, 1);
+    execCmds(dir, [
+      'touch file4.txt',
+      'git add file4.txt',
+      'git commit --quiet --no-gpg-sign -m "commit4"',
+    ]);
+    const result4 = fromClosestTag(dir);
+    assert.type(result4, 'number');
+    assert.is(result4, 2);
+    execCmds(dir, [
+      'touch file5.txt',
+      'git add file5.txt',
+      'git commit --quiet --no-gpg-sign -m "commit5"',
+      'git tag --no-sign -m "v2" v2',
+    ]);
+    const result5 = fromClosestTag(dir);
+    assert.type(result5, 'number');
+    assert.is(result5, 0);
+    execCmds(dir, [
+      'touch file6.txt',
+      'git add file6.txt',
+      'git commit --quiet --no-gpg-sign -m "commit6"',
+    ]);
+    const result6 = fromClosestTag(dir);
+    assert.type(result6, 'number');
+    assert.is(result6, 1);
   });
 });

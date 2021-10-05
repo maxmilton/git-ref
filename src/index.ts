@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { execSync } from 'child_process';
 
 /**
@@ -16,7 +18,6 @@ export function gitRef(cwd?: string): string {
     });
     reference = result.toString().trim();
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error(error);
   }
 
@@ -32,7 +33,7 @@ export default gitRef;
  * the first 7 characters (default `false`).
  * @param cwd - Modify the working directory git is executed in (default is the
  * directory of the current node process).
- * @returns The git commit hash.
+ * @returns A git commit hash.
  */
 export function gitHash(long?: boolean, cwd?: string): string {
   let hash = '';
@@ -43,7 +44,6 @@ export function gitHash(long?: boolean, cwd?: string): string {
     });
     hash = result.toString().trim();
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error(error);
   }
 
@@ -64,9 +64,33 @@ export function isDirty(cwd?: string): boolean {
     const result = execSync('git status --porcelain', { cwd });
     dirty = !!result.toString().trim();
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error(error);
   }
 
   return dirty;
+}
+
+/**
+ * Get the number of commits from the closest tagged commit to the HEAD commit.
+ *
+ * Note: Unix only due to shell command substitution.
+ *
+ * @param cwd - Modify the working directory git is executed in (default is the
+ * directory of the current node process).
+ * @returns The number of commits from closest tag to HEAD or -1 when error.
+ */
+export function fromClosestTag(cwd?: string): number {
+  let count = -1;
+
+  try {
+    const result = execSync(
+      'git rev-list $(git describe --abbrev=0)..HEAD --count',
+      { cwd },
+    );
+    count = +result.toString().trim();
+  } catch (error) {
+    console.error(error);
+  }
+
+  return count;
 }
