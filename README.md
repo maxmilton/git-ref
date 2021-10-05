@@ -66,6 +66,18 @@ const state = isDirty();
 console.log(state); // false
 ```
 
+### Commits away from closest tag
+
+Get the number of commits from the closest tagged commit to the current HEAD commit.
+
+```js
+import { fromClosestTag } from 'git-ref';
+
+const count = fromClosestTag();
+
+console.log(count); // 0
+```
+
 ## Changelog
 
 See [releases on GitHub](https://github.com/maxmilton/git-ref/releases).
