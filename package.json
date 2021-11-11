@@ -19,7 +19,7 @@
     "lint:js": "eslint --ignore-path .gitignore --ext .ts,.js,.mjs,.cjs .",
     "lint:ts": "tsc --project test --noEmit",
     "prebuild": "rm -rf dist; mkdir dist",
-    "test": "c8 --all --include=src --reporter=text --reporter=lcovonly uvu -r esbuild-register test '\\.test\\.ts$'"
+    "test": "c8 --all --include=src --reporter=text --reporter=lcovonly uvu -r tsm test '\\.test\\.ts$'"
   },
   "devDependencies": {
     "@types/node": "16.11.7",
@@ -27,7 +27,7 @@
     "@typescript-eslint/parser": "5.3.1",
     "c8": "7.10.0",
     "esbuild": "0.13.13",
-    "esbuild-register": "3.0.0",
+    "tsm": "2.1.4",
     "eslint": "7.32.0",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-config-airbnb-typescript": "15.0.0",
