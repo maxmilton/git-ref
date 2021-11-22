@@ -35,11 +35,5 @@
     "tsm": "2.1.4",
     "typescript": "4.5.2",
     "uvu": "0.5.2"
-  },
-  "prettier": {
-    "arrowParens": "always",
-    "endOfLine": "lf",
-    "singleQuote": true,
-    "trailingComma": "all"
   }
 }
