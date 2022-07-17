@@ -21,12 +21,12 @@
     "test": "c8 --all --include=src --reporter=text --reporter=lcovonly uvu -r tsm test '\\.test\\.ts$'"
   },
   "devDependencies": {
-    "@types/node": "17.0.41",
-    "@typescript-eslint/eslint-plugin": "5.30.5",
-    "@typescript-eslint/parser": "5.30.5",
+    "@types/node": "18.0.6",
+    "@typescript-eslint/eslint-plugin": "5.30.6",
+    "@typescript-eslint/parser": "5.30.6",
     "c8": "7.11.3",
-    "esbuild": "0.14.48",
-    "eslint": "8.19.0",
+    "esbuild": "0.14.49",
+    "eslint": "8.20.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "17.0.0",
     "eslint-plugin-import": "2.26.0",
