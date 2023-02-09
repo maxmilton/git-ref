@@ -1,4 +1,4 @@
-[![Build status](https://img.shields.io/github/workflow/status/maxmilton/git-ref/ci)](https://github.com/maxmilton/git-ref/actions)
+[![Build status](https://img.shields.io/github/actions/workflow/status/maxmilton/git-ref/ci.yml?branch=master)](https://github.com/maxmilton/git-ref/actions)
 [![Coverage status](https://img.shields.io/codeclimate/coverage/MaxMilton/git-ref)](https://codeclimate.com/github/MaxMilton/git-ref)
 [![NPM version](https://img.shields.io/npm/v/git-ref.svg)](https://www.npmjs.com/package/git-ref)
 [![NPM bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/git-ref.svg)](https://bundlephobia.com/result?p=git-ref)
