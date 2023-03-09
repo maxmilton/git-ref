@@ -4,7 +4,7 @@ specifiers:
   '@types/node': 18.14.6
   '@typescript-eslint/eslint-plugin': 5.54.1
   '@typescript-eslint/parser': 5.54.1
-  c8: 7.12.0
+  c8: 7.13.0
   eslint: 8.34.0
   eslint-config-airbnb-base: 15.0.0
   eslint-config-airbnb-typescript: 17.0.0
@@ -18,7 +18,7 @@ devDependencies:
   '@types/node': 18.14.6
   '@typescript-eslint/eslint-plugin': 5.54.1_7yuj4u7p4v7rbb3cv6vv6xwhnq
   '@typescript-eslint/parser': 5.54.1_7kw3g6rralp5ps6mg3uyzz6azm
-  c8: 7.12.0
+  c8: 7.13.0
   eslint: 8.34.0
   eslint-config-airbnb-base: 15.0.0_mvgyw3chnqkp6sgfmmtihyjpnm
   eslint-config-airbnb-typescript: 17.0.0_t5mkvdphjok4l5awhripjalq7a
@@ -379,8 +379,8 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /c8/7.12.0:
-    resolution: {integrity: sha512-CtgQrHOkyxr5koX1wEUmN/5cfDa2ckbHRA4Gy5LAL0zaCFtVWJS5++n+w4/sr2GWGerBxgTjpKeDclk/Qk6W/A==}
+  /c8/7.13.0:
+    resolution: {integrity: sha512-/NL4hQTv1gBL6J6ei80zu3IiTrmePDKXKXOTLpHvcIWZTVYQlDhVWjjWvkhICylE8EwwnMVzDZugCvdx0/DIIA==}
     engines: {node: '>=10.12.0'}
     hasBin: true
     dependencies:
