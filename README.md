@@ -37,7 +37,7 @@ import { gitRef } from 'git-ref';
 
 const ref = gitRef();
 
-console.log(ref); // v0.0.3-16-g93d0f1d-dev
+console.log(ref); // "v0.0.3-16-g93d0f1d-dev"
 ```
 
 ### Git hash
@@ -50,8 +50,8 @@ import { gitHash } from 'git-ref';
 const hash = gitHash();
 const hashLong = gitHash(true);
 
-console.log(hash); // 93d0f1d
-console.log(hashLong); // 93d0f1dc4de720863e4b5f74970cf8f2012f3d88
+console.log(hash); // "93d0f1d"
+console.log(hashLong); // "93d0f1dc4de720863e4b5f74970cf8f2012f3d88"
 ```
 
 ### Detect dirty tree state
@@ -68,7 +68,7 @@ console.log(state); // false
 
 ### Commits away from closest tag
 
-Get the number of commits from the closest tagged commit to the current HEAD commit.
+Get the number of commits from the closest tagged commit to the current `HEAD` commit.
 
 ```js
 import { fromClosestTag } from 'git-ref';
@@ -76,6 +76,18 @@ import { fromClosestTag } from 'git-ref';
 const count = fromClosestTag();
 
 console.log(count); // 0
+```
+
+### Branch name
+
+Get the current `HEAD` branch name.
+
+```js
+import { branchName } from 'git-ref';
+
+const branch = branchName();
+
+console.log(branch); // "master"
 ```
 
 ## Changelog

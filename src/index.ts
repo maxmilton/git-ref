@@ -94,3 +94,23 @@ export function fromClosestTag(cwd?: string): number {
 
   return count;
 }
+
+/**
+ * Get the HEAD branch name.
+ *
+ * @param cwd - Modify the working directory git is executed in (default is the
+ * directory of the current node process).
+ * @returns The branch name or an empty string when error.
+ */
+export function branchName(cwd?: string): string {
+  let branch = '';
+
+  try {
+    const result = execSync('git rev-parse --abbrev-ref HEAD', { cwd });
+    branch = result.toString().trim();
+  } catch (error) {
+    console.error(error);
+  }
+
+  return branch;
+}
