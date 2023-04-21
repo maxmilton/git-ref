@@ -88,4 +88,4 @@ See [releases on GitHub](https://github.com/maxmilton/git-ref/releases).
 
 ---
 
-© 2022 [Max Milton](https://maxmilton.com)
+© 2023 [Max Milton](https://maxmilton.com)
