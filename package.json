@@ -12,9 +12,6 @@
     "dist"
   ],
   "scripts": {
-    "__build": "pnpm run prebuild && tsc",
-    "__prebuild": "rm -rf dist; mkdir dist",
-    "__test": "c8 --all --include=src --reporter=text --reporter=lcovonly uvu -r tsm test '\\.test\\.ts$'",
     "build": "bun build --outdir=dist --target=node src/index.ts",
     "lint": "bun run lint:js && bun run lint:ts",
     "lint:js": "eslint --ignore-path .gitignore --ext .ts,.js,.mjs,.cjs .",
