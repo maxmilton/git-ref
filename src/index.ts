@@ -1,6 +1,7 @@
+/// <reference types="node" />
 /* eslint-disable no-console */
 
-import { execSync } from 'child_process';
+import { execSync } from 'node:child_process';
 
 /**
  * Get the HEAD git reference via [git describe](https://git-scm.com/docs/git-describe).
@@ -14,9 +15,10 @@ export function gitRef(cwd?: string): string {
 
   try {
     const result = execSync('git describe --always --dirty="-dev" --broken', {
+      encoding: 'utf8',
       cwd,
     });
-    reference = result.toString().trim();
+    reference = result.trim();
   } catch (error) {
     console.error(error);
   }
@@ -40,9 +42,10 @@ export function gitHash(long?: boolean, cwd?: string): string {
 
   try {
     const result = execSync(`git rev-parse${long ? '' : ' --short'} HEAD`, {
+      encoding: 'utf8',
       cwd,
     });
-    hash = result.toString().trim();
+    hash = result.trim();
   } catch (error) {
     console.error(error);
   }
@@ -61,8 +64,11 @@ export function isDirty(cwd?: string): boolean {
   let dirty = false;
 
   try {
-    const result = execSync('git status --porcelain', { cwd });
-    dirty = !!result.toString().trim();
+    const result = execSync('git status --porcelain', {
+      encoding: 'utf8',
+      cwd,
+    });
+    dirty = !!result.trim();
   } catch (error) {
     console.error(error);
   }
@@ -85,9 +91,9 @@ export function fromClosestTag(cwd?: string): number {
   try {
     const result = execSync(
       'git rev-list $(git describe --abbrev=0)..HEAD --count',
-      { cwd },
+      { encoding: 'utf8', cwd },
     );
-    count = +result.toString().trim();
+    count = +result.trim();
   } catch (error) {
     console.error(error);
   }
@@ -106,8 +112,11 @@ export function branchName(cwd?: string): string {
   let branch = '';
 
   try {
-    const result = execSync('git rev-parse --abbrev-ref HEAD', { cwd });
-    branch = result.toString().trim();
+    const result = execSync('git rev-parse --abbrev-ref HEAD', {
+      encoding: 'utf8',
+      cwd,
+    });
+    branch = result.trim();
   } catch (error) {
     console.error(error);
   }

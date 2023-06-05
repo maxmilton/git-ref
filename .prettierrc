@@ -2,5 +2,13 @@
   "arrowParens": "always",
   "endOfLine": "lf",
   "singleQuote": true,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": ["*.spec.ts", "*.test.ts"],
+      "options": {
+        "printWidth": 100
+      }
+    }
+  ]
 }
