@@ -21,6 +21,7 @@ jobs:
       - run: bun run test
       # FIXME: Enable coverage reporting once bun test supports it; https://github.com/oven-sh/bun/issues/2311
       # - name: Report coverage
+      #   if: ${{ github.repository_owner == 'maxmilton' }}
       #   run: |
       #     curl -Lo ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
       #     chmod +x ./cc-test-reporter
