@@ -1,8 +1,8 @@
 {
   "name": "git-ref",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "type": "module",
-  "description": "Get the current git reference via git describe",
+  "description": "Get git information using your system git executable",
   "repository": "maxmilton/git-ref",
   "author": "Max Milton <max@happyhackers.xyz>",
   "license": "MIT",
