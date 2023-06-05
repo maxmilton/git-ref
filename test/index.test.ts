@@ -138,7 +138,7 @@ describe('gitRef', () => {
     ]);
     const result5 = gitRef(dir);
     expect(result5).toHaveLength(13);
-    expect(result5).toMatch(/^v2-1-/);
+    expect(result5).toStartWith('v2-1-');
     expect(result4).not.toBe(result5);
   });
 
@@ -156,7 +156,7 @@ describe('gitRef', () => {
     ]);
     const result = gitRef(dir);
     expect(result).toBeString();
-    expect(result).toMatch(/-dev$/);
+    expect(result).toEndWith('-dev');
   });
 
   test('appends "-broken" in repo with broken tree', () => {
@@ -172,7 +172,7 @@ describe('gitRef', () => {
     ]);
     const result = gitRef(dir);
     expect(result).toBeString();
-    expect(result).toMatch(/-broken$/);
+    expect(result).toEndWith('-broken');
   });
 });
 
