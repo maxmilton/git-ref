@@ -22,15 +22,14 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
-    "@types/node": "20.10.7",
+    "@types/bun": "1.0.5",
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
-    "bun-types": "1.0.21",
     "eslint": "8.56.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "17.1.0",
     "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-unicorn": "50.0.1",
+    "eslint-plugin-unicorn": "51.0.1",
     "typescript": "5.3.3"
   }
 }
