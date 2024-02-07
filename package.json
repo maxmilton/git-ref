@@ -6,11 +6,10 @@
   "repository": "maxmilton/git-ref",
   "author": "Max Milton <max@happyhackers.xyz>",
   "license": "MIT",
+  "sideEffects": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "bun build --outdir=dist --target=node src/index.ts",
     "lint": "bun run lint:fmt && bun run lint:js && bun run lint:ts",
@@ -19,7 +18,7 @@
     "lint:ts": "tsc --noEmit",
     "postbuild": "tsc --emitDeclarationOnly --declaration --declarationDir dist src/index.ts",
     "prebuild": "rm -rf dist",
-    "test": "bun test"
+    "test": "bun test --coverage"
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
@@ -33,6 +32,5 @@
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-unicorn": "50.0.1",
     "typescript": "5.3.3"
-  },
-  "sideEffects": false
+  }
 }
