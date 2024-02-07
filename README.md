@@ -100,4 +100,4 @@ See [releases on GitHub](https://github.com/maxmilton/git-ref/releases).
 
 ---
 
-© 2023 [Max Milton](https://maxmilton.com)
+© 2024 [Max Milton](https://maxmilton.com)
