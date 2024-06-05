@@ -17,7 +17,7 @@
   "[javascript][typescript]": {
     "editor.codeActionsOnSave": {
       "source.sortImports": "explicit",
-      "source.fixAll": "explicit",
+      "source.fixAll": "explicit"
     },
     "editor.defaultFormatter": "biomejs.biome"
   }

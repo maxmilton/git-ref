@@ -16,7 +16,7 @@
     "lint:fmt": "biome format .",
     "lint:js": "eslint --ignore-path .gitignore --ext .ts,.js,.mjs,.cjs .",
     "lint:ts": "tsc --noEmit",
-    "postbuild": "tsc --emitDeclarationOnly --declaration --declarationDir dist src/index.ts",
+    "postbuild": "tsc --emitDeclarationOnly --declaration --declarationDir dist --skipLibCheck src/index.ts",
     "prebuild": "rm -rf dist",
     "test": "bun test --coverage"
   },
