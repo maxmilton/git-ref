@@ -5,9 +5,8 @@
     "clientKind": "git",
     "useIgnoreFile": true
   },
-  "organizeImports": {
-    "enabled": false
-  },
+  "linter": { "enabled": false },
+  "organizeImports": { "enabled": false },
   "formatter": {
     "formatWithErrors": true,
     "indentStyle": "space",
@@ -18,13 +17,13 @@
   "javascript": {
     "formatter": {
       "semicolons": "always",
-      "trailingComma": "all",
+      "trailingCommas": "all",
       "quoteStyle": "single"
     }
   },
   "overrides": [
     {
-      "include": [".vscode/**"],
+      "include": [".vscode/**", "tsconfig.json", "tsconfig.node.json"],
       "json": {
         "parser": {
           "allowComments": true,
