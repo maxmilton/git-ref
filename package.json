@@ -21,7 +21,7 @@
     "test": "bun test --coverage"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.0",
+    "@biomejs/biome": "1.8.3",
     "@types/bun": "1.1.6",
     "@typescript-eslint/eslint-plugin": "7.17.0",
     "@typescript-eslint/parser": "7.17.0",
